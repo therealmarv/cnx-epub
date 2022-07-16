@@ -578,7 +578,7 @@ DOCUMENT_POINTER_TEMPLATE = """\
         itemtype="http://schema.org/Book"
         >
     <div data-type="metadata">
-      <h1 data-type="document-title" itemprop="name"><i>{{ \
+      <h1><i data-type="document-title" itemprop="name">{{ \
               metadata['title']|e }}</i></h1>
       <span data-type="document" data-value="pointer" />
       {% if metadata.get('cnx-archive-uri') %}
@@ -657,7 +657,7 @@ HTML_DOCUMENT = """\
       {%- endfor %}
         >
     <div data-type="metadata" style="display: none;">
-      <h1 data-type="document-title" itemprop="name"><i>{{ \
+      <h1><i data-type="document-title" itemprop="name">{{ \
               metadata['title']|e }}</i></h1>
       {% if metadata.get('revised') %}
       <span data-type="revised" data-value="{{ \
