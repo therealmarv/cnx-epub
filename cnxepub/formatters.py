@@ -41,6 +41,9 @@ __all__ = (
     'SingleHTMLFormatter',
     )
 
+def htmlFormatTitle():
+    return '<i>Marvin2</i> test'
+
 
 class DocumentContentFormatter(object):
     def __init__(self, document):
@@ -240,7 +243,7 @@ class SingleHTMLFormatter(object):
                 # And now the top-level title, too
                 etree.SubElement(
                       child_elem, 'h1', **{'data-type': 'document-title'}
-                      ).text = node.metadata['title']
+                      ).text = htmlFormatTitle(node.metadata['title'])
                 self._build_binder(node, child_elem)
             elif isinstance(node, (Document, DocumentPointer)):
                 html = bytes(HTMLFormatter(node, generate_ids=True))
@@ -580,7 +583,7 @@ DOCUMENT_POINTER_TEMPLATE = """\
         >
     <div data-type="metadata">
       <h1 data-type="document-title" itemprop="name">{{ \
-              marvin }}</h1>
+              htmlFormatTitle(metadata['title']) }}</h1>
       <span data-type="document" data-value="pointer" />
       {% if metadata.get('cnx-archive-uri') %}
       <span data-type="cnx-archive-uri" data-value="{{ \
@@ -594,7 +597,7 @@ DOCUMENT_POINTER_TEMPLATE = """\
     <div>
       <p>
         Click <a href="{{ metadata['url'] }}">here</a> to read {{ \
-            metadata['title']|e }}.
+            htmlFormatTitle(metadata['title']) }}.
       </p>
     </div>
   </body>
@@ -659,7 +662,7 @@ HTML_DOCUMENT = """\
         >
     <div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">{{ \
-             marvin }}</h1>
+              htmlFormatTitle(metadata['title']) }}</h1>
       {% if metadata.get('revised') %}
       <span data-type="revised" data-value="{{ \
           metadata['revised'] }}" />
@@ -914,11 +917,11 @@ def html_listify(tree, root_xl_element, extensions, list_type='ol'):
         li_elm = etree.SubElement(root_xl_element, 'li')
         if node['id'] not in extensions:  # no extension, no associated file
             span_elm = lxml.html.fragment_fromstring(
-                node['title'], create_parent='span')
+                htmlFormatTitle(node['title']), create_parent='span')
             li_elm.append(span_elm)
         else:
             a_elm = lxml.html.fragment_fromstring(
-                node['title'], create_parent='a')
+                 htmlFormatTitle(node['title']), create_parent='a')
             a_elm.set('href', ''.join([node['id'], extensions[node['id']]]))
             li_elm.append(a_elm)
         if node['id'] is not None and node['id'] != 'subcol':
