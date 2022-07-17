@@ -158,7 +158,7 @@ class HTMLFormatter(object):
             root = {}
         return {
             'metadata': self.model.metadata,
-            'marvin': '<i>Marvin</i> was here'
+            'marvin': '<i>Marvin</i> was here',
             'content': self._content,
             'is_translucent': getattr(self.model, 'is_translucent', False),
             'resources': getattr(self.model, 'resources', []),
