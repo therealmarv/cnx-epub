@@ -41,7 +41,7 @@ __all__ = (
     'SingleHTMLFormatter',
     )
 
-def htmlFormatTitle():
+def htmlFormatTitle(title):
     return '<i>Marvin2</i> test'
 
 
