@@ -158,6 +158,7 @@ class HTMLFormatter(object):
             root = {}
         return {
             'metadata': self.model.metadata,
+            'marvin': '<i>Marvin</i> was here'
             'content': self._content,
             'is_translucent': getattr(self.model, 'is_translucent', False),
             'resources': getattr(self.model, 'resources', []),
@@ -559,7 +560,7 @@ DOCUMENT_POINTER_TEMPLATE = """\
         itemtype="http://schema.org/Book"
         >
 
-    <title>{{ metadata['title']|e }}</title>
+    <title>{{ marvin }}</title>
 
     {# TODO Include this based on the feature being present #}
     <!-- These are for discoverability of accessible content. -->
@@ -579,7 +580,7 @@ DOCUMENT_POINTER_TEMPLATE = """\
         >
     <div data-type="metadata">
       <h1 data-type="document-title" itemprop="name">{{ \
-              metadata['title']|e }}</h1>
+              marvin }}</h1>
       <span data-type="document" data-value="pointer" />
       {% if metadata.get('cnx-archive-uri') %}
       <span data-type="cnx-archive-uri" data-value="{{ \
@@ -621,7 +622,7 @@ HTML_DOCUMENT = """\
         itemtype="http://schema.org/Book"
         >
 
-    <title>{{ metadata['title']|e }}</title>
+    <title>{{ marvin }}</title>
     {% if metadata.get('language') %}
     <meta itemprop="inLanguage"
           data-type="language"
@@ -658,7 +659,7 @@ HTML_DOCUMENT = """\
         >
     <div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">{{ \
-              metadata['title']|e }}</h1>
+             marvin }}</h1>
       {% if metadata.get('revised') %}
       <span data-type="revised" data-value="{{ \
           metadata['revised'] }}" />
