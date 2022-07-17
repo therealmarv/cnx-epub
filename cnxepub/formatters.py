@@ -161,7 +161,7 @@ class HTMLFormatter(object):
             root = {}
         return {
             'metadata': self.model.metadata,
-            'marvin': '<i>Marvin</i> was here',
+            'marvin': htmlFormatTitle(self.model.metadata['title']),
             'content': self._content,
             'is_translucent': getattr(self.model, 'is_translucent', False),
             'resources': getattr(self.model, 'resources', []),
@@ -583,7 +583,7 @@ DOCUMENT_POINTER_TEMPLATE = """\
         >
     <div data-type="metadata">
       <h1 data-type="document-title" itemprop="name">{{ \
-              htmlFormatTitle(metadata['title']) }}</h1>
+              marvin }}</h1>
       <span data-type="document" data-value="pointer" />
       {% if metadata.get('cnx-archive-uri') %}
       <span data-type="cnx-archive-uri" data-value="{{ \
@@ -597,7 +597,7 @@ DOCUMENT_POINTER_TEMPLATE = """\
     <div>
       <p>
         Click <a href="{{ metadata['url'] }}">here</a> to read {{ \
-            htmlFormatTitle(metadata['title']) }}.
+           marvin }}.
       </p>
     </div>
   </body>
@@ -662,7 +662,7 @@ HTML_DOCUMENT = """\
         >
     <div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">{{ \
-              htmlFormatTitle(metadata['title']) }}</h1>
+              marvin }}</h1>
       {% if metadata.get('revised') %}
       <span data-type="revised" data-value="{{ \
           metadata['revised'] }}" />
